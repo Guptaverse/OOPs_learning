@@ -38,6 +38,13 @@ class cars{
             strcpy(name,n);
 
         }
+        //This is how the default copy constructor look like
+        cars(cars &x){     // here we are passing object as reference because we cannt pass the copy of object to create a copy.
+            cout<<"Entered the copy constructor"<<endl;
+            price =x.price;
+            model = x.model;
+            strcpy(name,x.name);
+        }
 
 
 
@@ -57,7 +64,7 @@ class cars{
         // In order to set the price outside the class , i will use setters
         void set_price(float p){           // this is known as setter (accessing the private parameter internally)
            float msp = 51;
-           if(p>0){
+           if(p>msp){
                price = p;
            } 
            else{
@@ -85,15 +92,27 @@ int main(){
     //lets do the above by using constructor
     cars c("BMW",474,101);
     cars d("BOOM",475,102);
+    //Lets create a new object by using  copy constructor
+    cars e(d);  //this will create a copy of object d as e
+    cars f=e; //another way to create copy constructor
+    e.set_price(333);//we can also change the parameter in the newly created object 
+
     float discount;
     cout<<"Enter the discount : "<<endl;
     cin>>discount;
     b.apply_discount(discount);
     c.apply_discount(discount);
     d.apply_discount(discount);
+    cout<<"car B"<<endl;
     b.print_details();
+    cout<<"car C"<<endl;
     c.print_details();
+    cout<<"car D"<<endl;
     d.print_details();
+    cout<<"car E"<<endl;
+    e.print_details();//print the copied constructor 
+    cout<<"car F"<<endl;
+    f.print_details();//print the copied constructor 
     
     return 0;
 }
